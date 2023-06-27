@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "osmosis_protobuf"
+name = "osmosis15_protobuf"
 version = "0.2.0"
 description = "This package contains a compiled python version of all osmosis protobuf files with their dependencies"
 authors = [
@@ -26,4 +26,4 @@ dynamic = []
 "Bug Tracker" = "https://github.com/ctrl-Felix/cosmospy-protobuf/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/osmosis_protobuf"]
+packages = ["src/osmosis15_protobuf"]
