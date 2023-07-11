@@ -1,37 +1,37 @@
 {
-  "https://github.com/cosmos/cosmos-sdk.git": {
+  "https://github.com/cosmos/interchain-security.git": {
     "include": true,
-    "branch": "v0.45.13-ics",
-    "paths": ["proto/cosmos"]
-  },
-  "https://github.com/informalsystems/tendermint.git": {
-    "include": true,
-    "branch": "v0.34.26",
-    "paths": ["proto/tendermint"]
+    "branch": "v2.0.0",
+    "paths": ["proto/interchain_security", "third_party/gogoproto", "third_party/google", "third_party/proto/confio", "third_party/proto/cosmos", "third_party/proto/cosmos_proto", "third_party/proto/ibc", "third_party/proto/tendermint"]
   },
   "https://github.com/cosmos/ibc-go": {
     "include": true,
-    "branch": "v4.2.0",
-    "paths": ["proto/ibc", "third_party/proto/google"]
+    "branch": "v4.4.2",
+    "paths": ["proto/ibc", "third_party/proto/cosmos", "third_party/proto/cosmos_proto", "third_party/proto/gogoproto", "third_party/proto/google", "third_party/proto/tendermint"]
+  },
+  "https://github.com/cometbft/cometbft.git": {
+    "include": true,
+    "branch": "v0.34.29",
+    "paths": ["proto/tendermint"]
   },
   "https://github.com/cosmos/cosmos-proto.git": {
     "include": true,
-    "branch": "main",
+    "branch": "v1.0.0-beta.1",
     "paths": ["proto/cosmos_proto"]
   },
-  "https://github.com/cosmos/gogoproto.git": {
+  "https://github.com/regen-network/protobuf.git": {
     "include": true,
-    "branch": "main",
-    "paths": ["gogoproto"]
+    "branch": "v1.3.3-alpha.regen.1",
+    "paths": ["proto/proto3_proto", "proto/test_proto", "protobuf/google"]
   },
   "https://github.com/confio/ics23.git": {
     "include": true,
-    "branch": "master",
-    "paths": ["proto/cosmos/ics23/v1/proofs.proto"]
+    "branch": "go/v0.9.0",
+    "paths": ["proofs.proto"]
   },
-  "https://github.com/cosmos/interchain-security.git": {
+  "https://github.com/cosmos/cosmos-sdk.git": {
     "include": true,
-    "branch": "v1.0.0",
-    "paths": ["proto/interchain_security/ccv"]
+    "branch": "v0.45.16-ics",
+    "paths": ["proto/cosmos", "third_party/proto/confio", "third_party/proto/cosmos_proto", "third_party/proto/gogoproto", "third_party/proto/google", "third_party/proto/tendermint"]
   }
 }
