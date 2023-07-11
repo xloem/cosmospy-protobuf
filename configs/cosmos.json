@@ -22,7 +22,7 @@
   "https://github.com/regen-network/protobuf.git": {
     "include": true,
     "branch": "v1.3.3-alpha.regen.1",
-    "paths": ["gogoproto", "proto/proto3_proto", "proto/test_proto", "protobuf/google"]
+    "paths": ["gogoproto"]
   },
   "https://github.com/confio/ics23.git": {
     "include": true,
