@@ -1,0 +1,18 @@
+"""Generated protocol buffer code."""
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
+from google.protobuf import symbol_database as _symbol_database
+from google.protobuf.internal import builder as _builder
+_sym_db = _symbol_database.Default()
+from ....gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n"akash/staking/v1beta3/params.proto\x12\x15akash.staking.v1beta3\x1a\x14gogoproto/gogo.proto"s\n\x06Params\x12i\n\x13min_commission_rate\x18\x01 \x01(\tBL\xc8\xde\x1f\x00\xda\xde\x1f&github.com/cosmos/cosmos-sdk/types.Dec\xf2\xde\x1f\x1ayaml:"min_commission_rate"B<Z:github.com/akash-network/akash-api/go/node/staking/v1beta3b\x06proto3')
+_globals = globals()
+_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'akash.staking.v1beta3.params_pb2', _globals)
+if _descriptor._USE_C_DESCRIPTORS == False:
+    DESCRIPTOR._options = None
+    DESCRIPTOR._serialized_options = b'Z:github.com/akash-network/akash-api/go/node/staking/v1beta3'
+    _PARAMS.fields_by_name['min_commission_rate']._options = None
+    _PARAMS.fields_by_name['min_commission_rate']._serialized_options = b'\xc8\xde\x1f\x00\xda\xde\x1f&github.com/cosmos/cosmos-sdk/types.Dec\xf2\xde\x1f\x1ayaml:"min_commission_rate"'
+    _globals['_PARAMS']._serialized_start = 83
+    _globals['_PARAMS']._serialized_end = 198
