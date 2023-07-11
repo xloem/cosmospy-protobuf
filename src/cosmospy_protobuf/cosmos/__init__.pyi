@@ -10,7 +10,6 @@ from . import evidence
 from . import feegrant
 from . import genutil
 from . import gov
-from . import ics23
 from . import mint
 from . import params
 from . import slashing

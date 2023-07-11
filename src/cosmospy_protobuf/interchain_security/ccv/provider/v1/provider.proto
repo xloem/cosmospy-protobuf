@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package interchain_security.ccv.provider.v1;
 
-option go_package = "github.com/cosmos/interchain-security/x/ccv/provider/types";
+option go_package = "github.com/cosmos/interchain-security/v2/x/ccv/provider/types";
 
 import "gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
@@ -11,6 +11,7 @@ import "ibc/core/client/v1/client.proto";
 import "ibc/lightclients/tendermint/v1/tendermint.proto";
 import "tendermint/crypto/keys.proto";
 import "cosmos/evidence/v1beta1/evidence.proto";
+import "cosmos/base/v1beta1/coin.proto";
 
 // ConsumerAdditionProposal is a governance proposal on the provider chain to spawn a new consumer chain.
 // If it passes, then all validators on the provider chain are expected to validate the consumer chain at spawn time
@@ -61,6 +62,13 @@ message ConsumerAdditionProposal {
     // This param is a part of the cosmos sdk staking module. In the case of 
     // a ccv enabled consumer chain, the ccv module acts as the staking module.
     int64 historical_entries = 13;
+    // The ID of a token transfer channel used for the Reward Distribution
+    // sub-protocol. If DistributionTransmissionChannel == "", a new transfer
+    // channel is created on top of the same connection as the CCV channel.
+    // Note that transfer_channel_id is the ID of the channel end on the consumer chain.
+    // it is most relevant for chains performing a sovereign to consumer changeover
+    // in order to maintan the existing ibc transfer channel
+    string distribution_transmission_channel = 14;
 }
 
 // ConsumerRemovalProposal is a governance proposal on the provider chain to remove (and stop) a consumer chain.
@@ -136,6 +144,10 @@ message Params {
   // The maximum amount of throttled slash or vsc matured packets 
   // that can be queued for a single consumer before the provider chain halts.
   int64 max_throttled_packets = 8;
+
+  // The fee required to be paid to add a reward denom
+  cosmos.base.v1beta1.Coin consumer_reward_denom_registration_fee = 9
+      [(gogoproto.nullable) = false];
 }
 
 message HandshakeMetadata {
@@ -143,7 +155,7 @@ message HandshakeMetadata {
   string version = 2;
 }
 
-// SlashAcks contains addesses of consumer chain validators
+// SlashAcks contains cons addresses of consumer chain validators
 // successfully slashed on the provider chain
 message SlashAcks {
   repeated string addresses = 1;
@@ -196,9 +208,36 @@ message VscSendTimestamp {
   google.protobuf.Timestamp timestamp = 2 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
 }
 
+//
+// Key assignment section
+//
+
 message KeyAssignmentReplacement {
   bytes provider_addr = 1;
   tendermint.crypto.PublicKey prev_c_key = 2;
   int64 power = 3;
 }
 
+// Used to serialize the ValidatorConsumerPubKey index from key assignment
+// ValidatorConsumerPubKey: (chainID, providerAddr consAddr) -> consumerKey tmprotocrypto.PublicKey
+message ValidatorConsumerPubKey {
+  string chain_id = 1;
+  bytes provider_addr = 2;
+  tendermint.crypto.PublicKey consumer_key = 3;
+}
+
+// Used to serialize the ValidatorConsumerAddr index from key assignment
+// ValidatorByConsumerAddr: (chainID, consumerAddr consAddr) -> providerAddr consAddr
+message ValidatorByConsumerAddr {
+  string chain_id = 1;
+  bytes consumer_addr = 2;
+  bytes provider_addr = 3;
+}
+
+// Used to serialize the ConsumerAddrsToPrune index from key assignment
+// ConsumerAddrsToPrune: (chainID, vscID uint64) -> consumerAddrs AddressList
+message ConsumerAddrsToPrune {
+  string chain_id = 1;
+  uint64 vsc_id = 2;
+  AddressList consumer_addrs = 3;
+}

@@ -4,7 +4,7 @@ from cosmos_proto import cosmos_pb2 as _cosmos_pb2
 from google.protobuf import any_pb2 as _any_pb2
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Optional, Union as _Union
+from typing import ClassVar as _ClassVar, Optional as _Optional
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class MsgAssignConsumerKey(_message.Message):
@@ -14,12 +14,28 @@ class MsgAssignConsumerKey(_message.Message):
     CONSUMER_KEY_FIELD_NUMBER: _ClassVar[int]
     chain_id: str
     provider_addr: str
-    consumer_key: _any_pb2.Any
+    consumer_key: str
 
-    def __init__(self, chain_id: _Optional[str]=..., provider_addr: _Optional[str]=..., consumer_key: _Optional[_Union[_any_pb2.Any, _Mapping]]=...) -> None:
+    def __init__(self, chain_id: _Optional[str]=..., provider_addr: _Optional[str]=..., consumer_key: _Optional[str]=...) -> None:
         ...
 
 class MsgAssignConsumerKeyResponse(_message.Message):
+    __slots__ = []
+
+    def __init__(self) -> None:
+        ...
+
+class MsgRegisterConsumerRewardDenom(_message.Message):
+    __slots__ = ['denom', 'depositor']
+    DENOM_FIELD_NUMBER: _ClassVar[int]
+    DEPOSITOR_FIELD_NUMBER: _ClassVar[int]
+    denom: str
+    depositor: str
+
+    def __init__(self, denom: _Optional[str]=..., depositor: _Optional[str]=...) -> None:
+        ...
+
+class MsgRegisterConsumerRewardDenomResponse(_message.Message):
     __slots__ = []
 
     def __init__(self) -> None:
