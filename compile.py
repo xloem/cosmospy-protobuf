@@ -5,6 +5,8 @@ import re
 import subprocess
 import sys
 
+import google
+
 parser = argparse.ArgumentParser(description="Aggregate all protobuf files")
 parser.add_argument(
     "-p",
@@ -20,7 +22,7 @@ package_name = "src/" + args.package_name
 logging.basicConfig(format="%(asctime)s - %(levelname)s:%(message)s",
                     level=logging.DEBUG)
 absolute_path = os.path.abspath(package_name)
-
+google_path = os.path.dirname(google.__path__[0])
 
 def run_protoc(filepath):
     if (os.path.basename(filepath) == "query.proto"
@@ -31,6 +33,8 @@ def run_protoc(filepath):
             "grpc_tools.protoc",
             "--proto_path",
             absolute_path,
+            '--proto_path',
+            google_path,
             "--python_out",
             package_name,
             "--pyi_out",
@@ -48,6 +52,7 @@ def run_protoc(filepath):
             "-m",
             "grpc_tools.protoc",
             f"--proto_path={absolute_path}",
+            f"--proto_path={google_path}",
             f"--python_out={package_name}",
             f"--pyi_out={package_name}",
             filepath,
@@ -65,6 +70,8 @@ def fix_proto_imports(filepath):
         "protoletariat",
         "--create-package",
         "--in-place",
+        "--exclude-imports-glob",
+        "google/*",
         "--python-out",
         package_name,
         "--module-suffixes",
@@ -81,6 +88,7 @@ def fix_proto_imports(filepath):
         "_grpc.pyi",
         "protoc",
         f"--proto-path={absolute_path}",
+        f"--proto-path={google_path}",
         filepath,
     ]
     subprocess.run(cmd)
