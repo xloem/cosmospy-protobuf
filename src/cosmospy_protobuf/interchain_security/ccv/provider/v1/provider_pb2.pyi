@@ -72,6 +72,20 @@ class EquivocationProposal(_message.Message):
     def __init__(self, title: _Optional[str]=..., description: _Optional[str]=..., equivocations: _Optional[_Iterable[_Union[_evidence_pb2.Equivocation, _Mapping]]]=...) -> None:
         ...
 
+class ChangeRewardDenomsProposal(_message.Message):
+    __slots__ = ['title', 'description', 'denoms_to_add', 'denoms_to_remove']
+    TITLE_FIELD_NUMBER: _ClassVar[int]
+    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    DENOMS_TO_ADD_FIELD_NUMBER: _ClassVar[int]
+    DENOMS_TO_REMOVE_FIELD_NUMBER: _ClassVar[int]
+    title: str
+    description: str
+    denoms_to_add: _containers.RepeatedScalarFieldContainer[str]
+    denoms_to_remove: _containers.RepeatedScalarFieldContainer[str]
+
+    def __init__(self, title: _Optional[str]=..., description: _Optional[str]=..., denoms_to_add: _Optional[_Iterable[str]]=..., denoms_to_remove: _Optional[_Iterable[str]]=...) -> None:
+        ...
+
 class GlobalSlashEntry(_message.Message):
     __slots__ = ['recv_time', 'consumer_chain_id', 'ibc_seq_num', 'provider_val_cons_addr']
     RECV_TIME_FIELD_NUMBER: _ClassVar[int]

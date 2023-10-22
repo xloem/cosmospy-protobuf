@@ -160,3 +160,21 @@ class QueryCommunityPoolResponse(_message.Message):
 
     def __init__(self, pool: _Optional[_Iterable[_Union[_coin_pb2.DecCoin, _Mapping]]]=...) -> None:
         ...
+
+class QueryTokenizeShareRecordRewardRequest(_message.Message):
+    __slots__ = ['owner_address']
+    OWNER_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    owner_address: str
+
+    def __init__(self, owner_address: _Optional[str]=...) -> None:
+        ...
+
+class QueryTokenizeShareRecordRewardResponse(_message.Message):
+    __slots__ = ['rewards', 'total']
+    REWARDS_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_FIELD_NUMBER: _ClassVar[int]
+    rewards: _containers.RepeatedCompositeFieldContainer[_distribution_pb2.TokenizeShareRecordReward]
+    total: _containers.RepeatedCompositeFieldContainer[_coin_pb2.DecCoin]
+
+    def __init__(self, rewards: _Optional[_Iterable[_Union[_distribution_pb2.TokenizeShareRecordReward, _Mapping]]]=..., total: _Optional[_Iterable[_Union[_coin_pb2.DecCoin, _Mapping]]]=...) -> None:
+        ...

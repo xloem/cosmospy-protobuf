@@ -2,6 +2,7 @@ from cosmos.base.query.v1beta1 import pagination_pb2 as _pagination_pb2
 from gogoproto import gogo_pb2 as _gogo_pb2
 from google.api import annotations_pb2 as _annotations_pb2
 from cosmos.staking.v1beta1 import staking_pb2 as _staking_pb2
+from cosmos.base.v1beta1 import coin_pb2 as _coin_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
@@ -264,4 +265,130 @@ class QueryParamsResponse(_message.Message):
     params: _staking_pb2.Params
 
     def __init__(self, params: _Optional[_Union[_staking_pb2.Params, _Mapping]]=...) -> None:
+        ...
+
+class QueryTokenizeShareRecordByIdRequest(_message.Message):
+    __slots__ = ['id']
+    ID_FIELD_NUMBER: _ClassVar[int]
+    id: int
+
+    def __init__(self, id: _Optional[int]=...) -> None:
+        ...
+
+class QueryTokenizeShareRecordByIdResponse(_message.Message):
+    __slots__ = ['record']
+    RECORD_FIELD_NUMBER: _ClassVar[int]
+    record: _staking_pb2.TokenizeShareRecord
+
+    def __init__(self, record: _Optional[_Union[_staking_pb2.TokenizeShareRecord, _Mapping]]=...) -> None:
+        ...
+
+class QueryTokenizeShareRecordByDenomRequest(_message.Message):
+    __slots__ = ['denom']
+    DENOM_FIELD_NUMBER: _ClassVar[int]
+    denom: str
+
+    def __init__(self, denom: _Optional[str]=...) -> None:
+        ...
+
+class QueryTokenizeShareRecordByDenomResponse(_message.Message):
+    __slots__ = ['record']
+    RECORD_FIELD_NUMBER: _ClassVar[int]
+    record: _staking_pb2.TokenizeShareRecord
+
+    def __init__(self, record: _Optional[_Union[_staking_pb2.TokenizeShareRecord, _Mapping]]=...) -> None:
+        ...
+
+class QueryTokenizeShareRecordsOwnedRequest(_message.Message):
+    __slots__ = ['owner']
+    OWNER_FIELD_NUMBER: _ClassVar[int]
+    owner: str
+
+    def __init__(self, owner: _Optional[str]=...) -> None:
+        ...
+
+class QueryTokenizeShareRecordsOwnedResponse(_message.Message):
+    __slots__ = ['records']
+    RECORDS_FIELD_NUMBER: _ClassVar[int]
+    records: _containers.RepeatedCompositeFieldContainer[_staking_pb2.TokenizeShareRecord]
+
+    def __init__(self, records: _Optional[_Iterable[_Union[_staking_pb2.TokenizeShareRecord, _Mapping]]]=...) -> None:
+        ...
+
+class QueryAllTokenizeShareRecordsRequest(_message.Message):
+    __slots__ = ['pagination']
+    PAGINATION_FIELD_NUMBER: _ClassVar[int]
+    pagination: _pagination_pb2.PageRequest
+
+    def __init__(self, pagination: _Optional[_Union[_pagination_pb2.PageRequest, _Mapping]]=...) -> None:
+        ...
+
+class QueryAllTokenizeShareRecordsResponse(_message.Message):
+    __slots__ = ['records', 'pagination']
+    RECORDS_FIELD_NUMBER: _ClassVar[int]
+    PAGINATION_FIELD_NUMBER: _ClassVar[int]
+    records: _containers.RepeatedCompositeFieldContainer[_staking_pb2.TokenizeShareRecord]
+    pagination: _pagination_pb2.PageResponse
+
+    def __init__(self, records: _Optional[_Iterable[_Union[_staking_pb2.TokenizeShareRecord, _Mapping]]]=..., pagination: _Optional[_Union[_pagination_pb2.PageResponse, _Mapping]]=...) -> None:
+        ...
+
+class QueryLastTokenizeShareRecordIdRequest(_message.Message):
+    __slots__ = []
+
+    def __init__(self) -> None:
+        ...
+
+class QueryLastTokenizeShareRecordIdResponse(_message.Message):
+    __slots__ = ['id']
+    ID_FIELD_NUMBER: _ClassVar[int]
+    id: int
+
+    def __init__(self, id: _Optional[int]=...) -> None:
+        ...
+
+class QueryTotalTokenizeSharedAssetsRequest(_message.Message):
+    __slots__ = []
+
+    def __init__(self) -> None:
+        ...
+
+class QueryTotalTokenizeSharedAssetsResponse(_message.Message):
+    __slots__ = ['value']
+    VALUE_FIELD_NUMBER: _ClassVar[int]
+    value: _coin_pb2.Coin
+
+    def __init__(self, value: _Optional[_Union[_coin_pb2.Coin, _Mapping]]=...) -> None:
+        ...
+
+class QueryTotalLiquidStaked(_message.Message):
+    __slots__ = []
+
+    def __init__(self) -> None:
+        ...
+
+class QueryTotalLiquidStakedResponse(_message.Message):
+    __slots__ = ['tokens']
+    TOKENS_FIELD_NUMBER: _ClassVar[int]
+    tokens: str
+
+    def __init__(self, tokens: _Optional[str]=...) -> None:
+        ...
+
+class QueryTokenizeShareLockInfo(_message.Message):
+    __slots__ = ['address']
+    ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    address: str
+
+    def __init__(self, address: _Optional[str]=...) -> None:
+        ...
+
+class QueryTokenizeShareLockInfoResponse(_message.Message):
+    __slots__ = ['status', 'expiration_time']
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    EXPIRATION_TIME_FIELD_NUMBER: _ClassVar[int]
+    status: str
+    expiration_time: str
+
+    def __init__(self, status: _Optional[str]=..., expiration_time: _Optional[str]=...) -> None:
         ...

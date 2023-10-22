@@ -118,6 +118,16 @@ class DelegationDelegatorReward(_message.Message):
     def __init__(self, validator_address: _Optional[str]=..., reward: _Optional[_Iterable[_Union[_coin_pb2.DecCoin, _Mapping]]]=...) -> None:
         ...
 
+class TokenizeShareRecordReward(_message.Message):
+    __slots__ = ['record_id', 'reward']
+    RECORD_ID_FIELD_NUMBER: _ClassVar[int]
+    REWARD_FIELD_NUMBER: _ClassVar[int]
+    record_id: int
+    reward: _containers.RepeatedCompositeFieldContainer[_coin_pb2.DecCoin]
+
+    def __init__(self, record_id: _Optional[int]=..., reward: _Optional[_Iterable[_Union[_coin_pb2.DecCoin, _Mapping]]]=...) -> None:
+        ...
+
 class CommunityPoolSpendProposalWithDeposit(_message.Message):
     __slots__ = ['title', 'description', 'recipient', 'amount', 'deposit']
     TITLE_FIELD_NUMBER: _ClassVar[int]

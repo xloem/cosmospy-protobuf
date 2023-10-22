@@ -52,6 +52,36 @@ class MsgWithdrawValidatorCommissionResponse(_message.Message):
     def __init__(self) -> None:
         ...
 
+class MsgWithdrawTokenizeShareRecordReward(_message.Message):
+    __slots__ = ['owner_address', 'record_id']
+    OWNER_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    RECORD_ID_FIELD_NUMBER: _ClassVar[int]
+    owner_address: str
+    record_id: int
+
+    def __init__(self, owner_address: _Optional[str]=..., record_id: _Optional[int]=...) -> None:
+        ...
+
+class MsgWithdrawTokenizeShareRecordRewardResponse(_message.Message):
+    __slots__ = []
+
+    def __init__(self) -> None:
+        ...
+
+class MsgWithdrawAllTokenizeShareRecordReward(_message.Message):
+    __slots__ = ['owner_address']
+    OWNER_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    owner_address: str
+
+    def __init__(self, owner_address: _Optional[str]=...) -> None:
+        ...
+
+class MsgWithdrawAllTokenizeShareRecordRewardResponse(_message.Message):
+    __slots__ = []
+
+    def __init__(self) -> None:
+        ...
+
 class MsgFundCommunityPool(_message.Message):
     __slots__ = ['amount', 'depositor']
     AMOUNT_FIELD_NUMBER: _ClassVar[int]

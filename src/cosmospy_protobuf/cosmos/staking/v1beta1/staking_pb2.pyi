@@ -25,6 +25,13 @@ class InfractionType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     INFRACTION_TYPE_UNSPECIFIED: _ClassVar[InfractionType]
     INFRACTION_TYPE_DOUBLE_SIGN: _ClassVar[InfractionType]
     INFRACTION_TYPE_DOWNTIME: _ClassVar[InfractionType]
+
+class TokenizeShareLockStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = []
+    TOKENIZE_SHARE_LOCK_STATUS_UNSPECIFIED: _ClassVar[TokenizeShareLockStatus]
+    TOKENIZE_SHARE_LOCK_STATUS_LOCKED: _ClassVar[TokenizeShareLockStatus]
+    TOKENIZE_SHARE_LOCK_STATUS_UNLOCKED: _ClassVar[TokenizeShareLockStatus]
+    TOKENIZE_SHARE_LOCK_STATUS_LOCK_EXPIRING: _ClassVar[TokenizeShareLockStatus]
 BOND_STATUS_UNSPECIFIED: BondStatus
 BOND_STATUS_UNBONDED: BondStatus
 BOND_STATUS_UNBONDING: BondStatus
@@ -32,6 +39,10 @@ BOND_STATUS_BONDED: BondStatus
 INFRACTION_TYPE_UNSPECIFIED: InfractionType
 INFRACTION_TYPE_DOUBLE_SIGN: InfractionType
 INFRACTION_TYPE_DOWNTIME: InfractionType
+TOKENIZE_SHARE_LOCK_STATUS_UNSPECIFIED: TokenizeShareLockStatus
+TOKENIZE_SHARE_LOCK_STATUS_LOCKED: TokenizeShareLockStatus
+TOKENIZE_SHARE_LOCK_STATUS_UNLOCKED: TokenizeShareLockStatus
+TOKENIZE_SHARE_LOCK_STATUS_LOCK_EXPIRING: TokenizeShareLockStatus
 
 class HistoricalInfo(_message.Message):
     __slots__ = ['header', 'valset']
@@ -82,7 +93,7 @@ class Description(_message.Message):
         ...
 
 class Validator(_message.Message):
-    __slots__ = ['operator_address', 'consensus_pubkey', 'jailed', 'status', 'tokens', 'delegator_shares', 'description', 'unbonding_height', 'unbonding_time', 'commission', 'min_self_delegation', 'unbonding_on_hold_ref_count', 'unbonding_ids']
+    __slots__ = ['operator_address', 'consensus_pubkey', 'jailed', 'status', 'tokens', 'delegator_shares', 'description', 'unbonding_height', 'unbonding_time', 'commission', 'min_self_delegation', 'unbonding_on_hold_ref_count', 'unbonding_ids', 'validator_bond_shares', 'liquid_shares']
     OPERATOR_ADDRESS_FIELD_NUMBER: _ClassVar[int]
     CONSENSUS_PUBKEY_FIELD_NUMBER: _ClassVar[int]
     JAILED_FIELD_NUMBER: _ClassVar[int]
@@ -96,6 +107,8 @@ class Validator(_message.Message):
     MIN_SELF_DELEGATION_FIELD_NUMBER: _ClassVar[int]
     UNBONDING_ON_HOLD_REF_COUNT_FIELD_NUMBER: _ClassVar[int]
     UNBONDING_IDS_FIELD_NUMBER: _ClassVar[int]
+    VALIDATOR_BOND_SHARES_FIELD_NUMBER: _ClassVar[int]
+    LIQUID_SHARES_FIELD_NUMBER: _ClassVar[int]
     operator_address: str
     consensus_pubkey: _any_pb2.Any
     jailed: bool
@@ -109,8 +122,10 @@ class Validator(_message.Message):
     min_self_delegation: str
     unbonding_on_hold_ref_count: int
     unbonding_ids: _containers.RepeatedScalarFieldContainer[int]
+    validator_bond_shares: str
+    liquid_shares: str
 
-    def __init__(self, operator_address: _Optional[str]=..., consensus_pubkey: _Optional[_Union[_any_pb2.Any, _Mapping]]=..., jailed: bool=..., status: _Optional[_Union[BondStatus, str]]=..., tokens: _Optional[str]=..., delegator_shares: _Optional[str]=..., description: _Optional[_Union[Description, _Mapping]]=..., unbonding_height: _Optional[int]=..., unbonding_time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]]=..., commission: _Optional[_Union[Commission, _Mapping]]=..., min_self_delegation: _Optional[str]=..., unbonding_on_hold_ref_count: _Optional[int]=..., unbonding_ids: _Optional[_Iterable[int]]=...) -> None:
+    def __init__(self, operator_address: _Optional[str]=..., consensus_pubkey: _Optional[_Union[_any_pb2.Any, _Mapping]]=..., jailed: bool=..., status: _Optional[_Union[BondStatus, str]]=..., tokens: _Optional[str]=..., delegator_shares: _Optional[str]=..., description: _Optional[_Union[Description, _Mapping]]=..., unbonding_height: _Optional[int]=..., unbonding_time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]]=..., commission: _Optional[_Union[Commission, _Mapping]]=..., min_self_delegation: _Optional[str]=..., unbonding_on_hold_ref_count: _Optional[int]=..., unbonding_ids: _Optional[_Iterable[int]]=..., validator_bond_shares: _Optional[str]=..., liquid_shares: _Optional[str]=...) -> None:
         ...
 
 class ValAddresses(_message.Message):
@@ -160,15 +175,17 @@ class DVVTriplets(_message.Message):
         ...
 
 class Delegation(_message.Message):
-    __slots__ = ['delegator_address', 'validator_address', 'shares']
+    __slots__ = ['delegator_address', 'validator_address', 'shares', 'validator_bond']
     DELEGATOR_ADDRESS_FIELD_NUMBER: _ClassVar[int]
     VALIDATOR_ADDRESS_FIELD_NUMBER: _ClassVar[int]
     SHARES_FIELD_NUMBER: _ClassVar[int]
+    VALIDATOR_BOND_FIELD_NUMBER: _ClassVar[int]
     delegator_address: str
     validator_address: str
     shares: str
+    validator_bond: bool
 
-    def __init__(self, delegator_address: _Optional[str]=..., validator_address: _Optional[str]=..., shares: _Optional[str]=...) -> None:
+    def __init__(self, delegator_address: _Optional[str]=..., validator_address: _Optional[str]=..., shares: _Optional[str]=..., validator_bond: bool=...) -> None:
         ...
 
 class UnbondingDelegation(_message.Message):
@@ -234,19 +251,25 @@ class Redelegation(_message.Message):
         ...
 
 class Params(_message.Message):
-    __slots__ = ['unbonding_time', 'max_validators', 'max_entries', 'historical_entries', 'bond_denom']
+    __slots__ = ['unbonding_time', 'max_validators', 'max_entries', 'historical_entries', 'bond_denom', 'validator_bond_factor', 'global_liquid_staking_cap', 'validator_liquid_staking_cap']
     UNBONDING_TIME_FIELD_NUMBER: _ClassVar[int]
     MAX_VALIDATORS_FIELD_NUMBER: _ClassVar[int]
     MAX_ENTRIES_FIELD_NUMBER: _ClassVar[int]
     HISTORICAL_ENTRIES_FIELD_NUMBER: _ClassVar[int]
     BOND_DENOM_FIELD_NUMBER: _ClassVar[int]
+    VALIDATOR_BOND_FACTOR_FIELD_NUMBER: _ClassVar[int]
+    GLOBAL_LIQUID_STAKING_CAP_FIELD_NUMBER: _ClassVar[int]
+    VALIDATOR_LIQUID_STAKING_CAP_FIELD_NUMBER: _ClassVar[int]
     unbonding_time: _duration_pb2.Duration
     max_validators: int
     max_entries: int
     historical_entries: int
     bond_denom: str
+    validator_bond_factor: str
+    global_liquid_staking_cap: str
+    validator_liquid_staking_cap: str
 
-    def __init__(self, unbonding_time: _Optional[_Union[_duration_pb2.Duration, _Mapping]]=..., max_validators: _Optional[int]=..., max_entries: _Optional[int]=..., historical_entries: _Optional[int]=..., bond_denom: _Optional[str]=...) -> None:
+    def __init__(self, unbonding_time: _Optional[_Union[_duration_pb2.Duration, _Mapping]]=..., max_validators: _Optional[int]=..., max_entries: _Optional[int]=..., historical_entries: _Optional[int]=..., bond_denom: _Optional[str]=..., validator_bond_factor: _Optional[str]=..., global_liquid_staking_cap: _Optional[str]=..., validator_liquid_staking_cap: _Optional[str]=...) -> None:
         ...
 
 class DelegationResponse(_message.Message):
@@ -295,4 +318,26 @@ class ValidatorUpdates(_message.Message):
     updates: _containers.RepeatedCompositeFieldContainer[_types_pb2_1.ValidatorUpdate]
 
     def __init__(self, updates: _Optional[_Iterable[_Union[_types_pb2_1.ValidatorUpdate, _Mapping]]]=...) -> None:
+        ...
+
+class TokenizeShareRecord(_message.Message):
+    __slots__ = ['id', 'owner', 'module_account', 'validator']
+    ID_FIELD_NUMBER: _ClassVar[int]
+    OWNER_FIELD_NUMBER: _ClassVar[int]
+    MODULE_ACCOUNT_FIELD_NUMBER: _ClassVar[int]
+    VALIDATOR_FIELD_NUMBER: _ClassVar[int]
+    id: int
+    owner: str
+    module_account: str
+    validator: str
+
+    def __init__(self, id: _Optional[int]=..., owner: _Optional[str]=..., module_account: _Optional[str]=..., validator: _Optional[str]=...) -> None:
+        ...
+
+class PendingTokenizeShareAuthorizations(_message.Message):
+    __slots__ = ['addresses']
+    ADDRESSES_FIELD_NUMBER: _ClassVar[int]
+    addresses: _containers.RepeatedScalarFieldContainer[str]
+
+    def __init__(self, addresses: _Optional[_Iterable[str]]=...) -> None:
         ...

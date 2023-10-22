@@ -1,7 +1,7 @@
 {
   "https://github.com/cosmos/cosmos-sdk.git": {
     "include": true,
-    "branch": "v0.45.16-ics",
+    "branch": "v0.45.16-ics-lsm",
     "paths": ["proto/cosmos"]
   },
   "https://github.com/cometbft/cometbft.git": {
@@ -31,7 +31,7 @@
   },
   "https://github.com/cosmos/interchain-security.git": {
     "include": true,
-    "branch": "v2.0.0",
+    "branch": "v2.1.0-provider-lsm",
     "paths": ["proto/interchain_security", "third_party/google"]
   }
 }

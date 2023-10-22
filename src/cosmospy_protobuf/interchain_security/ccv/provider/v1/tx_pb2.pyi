@@ -24,19 +24,3 @@ class MsgAssignConsumerKeyResponse(_message.Message):
 
     def __init__(self) -> None:
         ...
-
-class MsgRegisterConsumerRewardDenom(_message.Message):
-    __slots__ = ['denom', 'depositor']
-    DENOM_FIELD_NUMBER: _ClassVar[int]
-    DEPOSITOR_FIELD_NUMBER: _ClassVar[int]
-    denom: str
-    depositor: str
-
-    def __init__(self, denom: _Optional[str]=..., depositor: _Optional[str]=...) -> None:
-        ...
-
-class MsgRegisterConsumerRewardDenomResponse(_message.Message):
-    __slots__ = []
-
-    def __init__(self) -> None:
-        ...

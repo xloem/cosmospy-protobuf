@@ -114,3 +114,141 @@ class MsgUndelegateResponse(_message.Message):
 
     def __init__(self, completion_time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]]=...) -> None:
         ...
+
+class MsgUnbondValidator(_message.Message):
+    __slots__ = ['validator_address']
+    VALIDATOR_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    validator_address: str
+
+    def __init__(self, validator_address: _Optional[str]=...) -> None:
+        ...
+
+class MsgUnbondValidatorResponse(_message.Message):
+    __slots__ = []
+
+    def __init__(self) -> None:
+        ...
+
+class MsgCancelUnbondingDelegation(_message.Message):
+    __slots__ = ['delegator_address', 'validator_address', 'amount', 'creation_height']
+    DELEGATOR_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    VALIDATOR_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    CREATION_HEIGHT_FIELD_NUMBER: _ClassVar[int]
+    delegator_address: str
+    validator_address: str
+    amount: _coin_pb2.Coin
+    creation_height: int
+
+    def __init__(self, delegator_address: _Optional[str]=..., validator_address: _Optional[str]=..., amount: _Optional[_Union[_coin_pb2.Coin, _Mapping]]=..., creation_height: _Optional[int]=...) -> None:
+        ...
+
+class MsgCancelUnbondingDelegationResponse(_message.Message):
+    __slots__ = []
+
+    def __init__(self) -> None:
+        ...
+
+class MsgTokenizeShares(_message.Message):
+    __slots__ = ['delegator_address', 'validator_address', 'amount', 'tokenized_share_owner']
+    DELEGATOR_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    VALIDATOR_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    TOKENIZED_SHARE_OWNER_FIELD_NUMBER: _ClassVar[int]
+    delegator_address: str
+    validator_address: str
+    amount: _coin_pb2.Coin
+    tokenized_share_owner: str
+
+    def __init__(self, delegator_address: _Optional[str]=..., validator_address: _Optional[str]=..., amount: _Optional[_Union[_coin_pb2.Coin, _Mapping]]=..., tokenized_share_owner: _Optional[str]=...) -> None:
+        ...
+
+class MsgTokenizeSharesResponse(_message.Message):
+    __slots__ = ['amount']
+    AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    amount: _coin_pb2.Coin
+
+    def __init__(self, amount: _Optional[_Union[_coin_pb2.Coin, _Mapping]]=...) -> None:
+        ...
+
+class MsgRedeemTokensForShares(_message.Message):
+    __slots__ = ['delegator_address', 'amount']
+    DELEGATOR_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    delegator_address: str
+    amount: _coin_pb2.Coin
+
+    def __init__(self, delegator_address: _Optional[str]=..., amount: _Optional[_Union[_coin_pb2.Coin, _Mapping]]=...) -> None:
+        ...
+
+class MsgRedeemTokensForSharesResponse(_message.Message):
+    __slots__ = ['amount']
+    AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    amount: _coin_pb2.Coin
+
+    def __init__(self, amount: _Optional[_Union[_coin_pb2.Coin, _Mapping]]=...) -> None:
+        ...
+
+class MsgTransferTokenizeShareRecord(_message.Message):
+    __slots__ = ['tokenize_share_record_id', 'sender', 'new_owner']
+    TOKENIZE_SHARE_RECORD_ID_FIELD_NUMBER: _ClassVar[int]
+    SENDER_FIELD_NUMBER: _ClassVar[int]
+    NEW_OWNER_FIELD_NUMBER: _ClassVar[int]
+    tokenize_share_record_id: int
+    sender: str
+    new_owner: str
+
+    def __init__(self, tokenize_share_record_id: _Optional[int]=..., sender: _Optional[str]=..., new_owner: _Optional[str]=...) -> None:
+        ...
+
+class MsgTransferTokenizeShareRecordResponse(_message.Message):
+    __slots__ = []
+
+    def __init__(self) -> None:
+        ...
+
+class MsgDisableTokenizeShares(_message.Message):
+    __slots__ = ['delegator_address']
+    DELEGATOR_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    delegator_address: str
+
+    def __init__(self, delegator_address: _Optional[str]=...) -> None:
+        ...
+
+class MsgDisableTokenizeSharesResponse(_message.Message):
+    __slots__ = []
+
+    def __init__(self) -> None:
+        ...
+
+class MsgEnableTokenizeShares(_message.Message):
+    __slots__ = ['delegator_address']
+    DELEGATOR_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    delegator_address: str
+
+    def __init__(self, delegator_address: _Optional[str]=...) -> None:
+        ...
+
+class MsgEnableTokenizeSharesResponse(_message.Message):
+    __slots__ = ['completion_time']
+    COMPLETION_TIME_FIELD_NUMBER: _ClassVar[int]
+    completion_time: _timestamp_pb2.Timestamp
+
+    def __init__(self, completion_time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]]=...) -> None:
+        ...
+
+class MsgValidatorBond(_message.Message):
+    __slots__ = ['delegator_address', 'validator_address']
+    DELEGATOR_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    VALIDATOR_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    delegator_address: str
+    validator_address: str
+
+    def __init__(self, delegator_address: _Optional[str]=..., validator_address: _Optional[str]=...) -> None:
+        ...
+
+class MsgValidatorBondResponse(_message.Message):
+    __slots__ = []
+
+    def __init__(self) -> None:
+        ...
